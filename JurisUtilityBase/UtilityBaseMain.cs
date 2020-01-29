@@ -137,11 +137,9 @@ namespace JurisUtilityBase
         {
             cliErrors = new DataSet();
             DataTable et = cliErrors.Tables.Add("Errors");
-            et.Columns.Add("ClientCode");
             et.Columns.Add("MatterCode");
             et.Columns.Add("BillToBill");
             et.Columns.Add("BillToEdit");
-            et.Columns.Add("Type");
             et.Columns.Add("ErrorMessage");
             System.Data.OleDb.OleDbConnection MyConnection;
             System.Data.DataSet DtSet;
@@ -160,8 +158,7 @@ namespace JurisUtilityBase
             {
                 string clicode = dt.Rows[i]["CliCode"].ToString();
                 string BillToBill = dt.Rows[i]["BillToBillFormat"].ToString();
-                //string Matter = dt.Rows[i]["Matter_Sys"].ToString();
-                //string BillToEdit = dt.Rows[i]["Tkpr_Sys"].ToString();
+
 
                 string sqlIns = "update client set CliBillFormat = '" + BillToBill + "' where clicode like '%000" + clicode + "'";
 
@@ -169,7 +166,7 @@ namespace JurisUtilityBase
 
                 if (_jurisUtility.error)
                 {
-                    et.Rows.Add(clicode, "", BillToBill, "", "Client", _jurisUtility.errorMessage);
+                    et.Rows.Add(clicode, BillToBill, "", _jurisUtility.errorMessage.Replace("\r", "").Replace("\n", "").Trim());
                     _jurisUtility.error = false;
                     _jurisUtility.errorMessage = "";
                 }
@@ -186,7 +183,6 @@ namespace JurisUtilityBase
             et.Columns.Add("MatterCode");
             et.Columns.Add("BillToBill");
             et.Columns.Add("BillToEdit");
-            et.Columns.Add("Type");
             et.Columns.Add("ErrorMessage");
             System.Data.OleDb.OleDbConnection MyConnection;
             System.Data.DataSet DtSet;
@@ -215,7 +211,7 @@ namespace JurisUtilityBase
 
                 if (_jurisUtility.error)
                 {
-                    et.Rows.Add(clicode, Matter, BillToBill, BillToEdit, "Matter", _jurisUtility.errorMessage);
+                    et.Rows.Add(clicode, Matter, BillToBill, BillToEdit, _jurisUtility.errorMessage.Replace("\r", "").Replace("\n", "").Trim());
                     _jurisUtility.error = false;
                     _jurisUtility.errorMessage = "";
                 }

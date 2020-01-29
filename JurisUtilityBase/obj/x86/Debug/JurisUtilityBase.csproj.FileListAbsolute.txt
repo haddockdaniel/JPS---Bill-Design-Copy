@@ -101,3 +101,4 @@ D:\Projects\JPS - Bill Design Copy\JurisUtilityBase\obj\x86\Debug\JPS - Bill Des
 D:\Projects\JPS - Bill Design Copy\JurisUtilityBase\obj\x86\Debug\JPS - Bill Design Copy.application
 D:\Projects\JPS - Bill Design Copy\JurisUtilityBase\obj\x86\Debug\JPS - Bill Design Copy.exe
 D:\Projects\JPS - Bill Design Copy\JurisUtilityBase\obj\x86\Debug\JPS - Bill Design Copy.pdb
+D:\Projects\JPS - Bill Design Copy\JurisUtilityBase\obj\x86\Debug\JurisUtilityBase.csprojResolveAssemblyReference.cache

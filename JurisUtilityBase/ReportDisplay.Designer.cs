@@ -48,7 +48,7 @@
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.Size = new System.Drawing.Size(148, 38);
             this.buttonPrint.TabIndex = 11;
-            this.buttonPrint.Text = "Print";
+            this.buttonPrint.Text = "Save Logs";
             this.buttonPrint.UseVisualStyleBackColor = false;
             this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
             // 

@@ -28,17 +28,19 @@ namespace JurisUtilityBase
         private void buttonPrint_Click(object sender, EventArgs e)
         {
 
-            PrinterDialog pd = new PrinterDialog();
-            pd.ShowDialog();
-            string printer = pd.printerName;
-            if (!string.IsNullOrEmpty(printer))
-            {
-                printTime(printer);
-                printExpense(printer);
-            }
+            //PrinterDialog pd = new PrinterDialog();
+          //  pd.ShowDialog();
+          //  string printer = pd.printerName;
+          //  if (!string.IsNullOrEmpty(printer))
+           // {
+
+
+                saveClient();
+                saveMatter();
+           // }
         }
 
-        private void printTime(string printer)
+        private void saveClient()
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -75,6 +77,7 @@ namespace JurisUtilityBase
                     {
                         Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[StartRow + i, StartCol + j];
                         myRange.Value2 = dataGridView1[j, i].Value == null ? "" : dataGridView1[j, i].Value;
+                        myRange.Value2 = myRange.Value2.Trim();
                     }
                     catch
                     {
@@ -96,15 +99,27 @@ namespace JurisUtilityBase
 
             _with1.PrintTitleRows = "$1:$" + dataGridView1.Columns.Count.ToString();
 
-            string Defprinter = null;
-            Defprinter = xlApp.ActivePrinter;
-            xlApp.ActivePrinter = printer;
+
+            SaveFileDialog ssv = new SaveFileDialog();
+            ssv.Filter = "Excel File|*.xlsx";
+            ssv.DefaultExt = "xlsx"; 
+            ssv.Title = "Save Client Error File";
+            ssv.ShowDialog();
+            string path = ssv.FileName;
+
+            xlWorkBook.SaveAs(path, Type.Missing,
+    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+            //string Defprinter = null;
+            //Defprinter = xlApp.ActivePrinter;
+            //xlApp.ActivePrinter = printer;
 
             // Print the range
-            usedrange.PrintOutEx(misValue, misValue, misValue, misValue,
-            misValue, misValue, misValue, misValue);
+           // usedrange.PrintOutEx(misValue, misValue, misValue, misValue,
+            //misValue, misValue, misValue, misValue);
             // }
-            xlApp.ActivePrinter = Defprinter;
+            //xlApp.ActivePrinter = Defprinter;
 
             // Cleanup:
             GC.Collect();
@@ -120,7 +135,7 @@ namespace JurisUtilityBase
             Cursor.Current = Cursors.Default;
         }
 
-        private void printExpense(string printer)
+        private void saveMatter()
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -157,6 +172,7 @@ namespace JurisUtilityBase
                     {
                         Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[StartRow + i, StartCol + j];
                         myRange.Value2 = dataGridView2[j, i].Value == null ? "" : dataGridView2[j, i].Value;
+                        myRange.Value2 = myRange.Value2.Trim();
                     }
                     catch
                     {
@@ -178,15 +194,26 @@ namespace JurisUtilityBase
 
             _with1.PrintTitleRows = "$1:$" + dataGridView2.Columns.Count.ToString();
 
-            string Defprinter = null;
-            Defprinter = xlApp.ActivePrinter;
-            xlApp.ActivePrinter = printer;
+            SaveFileDialog ssv = new SaveFileDialog();
+            ssv.Filter = "|Excel File|*.xlsx";
+            ssv.DefaultExt = "xlsx";
+            ssv.Title = "Save Matter Error File";
+            ssv.ShowDialog();
+            string path = ssv.FileName;
+
+            xlWorkBook.SaveAs(path, Type.Missing,
+    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+            //string Defprinter = null;
+           // Defprinter = xlApp.ActivePrinter;
+           // xlApp.ActivePrinter = printer;
 
             // Print the range
-            usedrange.PrintOutEx(misValue, misValue, misValue, misValue,
-            misValue, misValue, misValue, misValue);
+            //usedrange.PrintOutEx(misValue, misValue, misValue, misValue,
+           // misValue, misValue, misValue, misValue);
             // }
-            xlApp.ActivePrinter = Defprinter;
+            //xlApp.ActivePrinter = Defprinter;
 
             // Cleanup:
             GC.Collect();
